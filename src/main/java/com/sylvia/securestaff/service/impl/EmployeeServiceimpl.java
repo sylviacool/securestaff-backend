@@ -2,6 +2,7 @@ package com.sylvia.securestaff.service.impl;
 
 import com.sylvia.securestaff.dto.EmployeeDto;
 import com.sylvia.securestaff.entity.Employee;
+import com.sylvia.securestaff.exception.ResourceNotFoundException;
 import com.sylvia.securestaff.mapper.EmployeeMapper;
 import com.sylvia.securestaff.repository.EmployeeRepository;
 import com.sylvia.securestaff.service.EmployeeService;
@@ -20,5 +21,12 @@ public class EmployeeServiceimpl implements EmployeeService  {
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
         Employee savedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
+    }
+
+    @Override
+    public EmployeeDto getEmployeeById(Long employeeId) {
+       Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException(("Employee does not exist with given id : " + employeeId)));
+        return EmployeeMapper.mapToEmployeeDto(employee);
     }
 }
