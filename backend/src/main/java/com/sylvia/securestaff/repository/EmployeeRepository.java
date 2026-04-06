@@ -1,0 +1,8 @@
+package com.sylvia.securestaff.repository;
+
+import com.sylvia.securestaff.entity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+}
