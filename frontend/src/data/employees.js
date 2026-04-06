@@ -1,9 +1,9 @@
 const employees = [
   {
     id: 1,
-    firstName: "Ramesh",
-    lastName: "Fadatare",
-    email: "ramesh@gmail.com",
+    firstName: "Ogechi",
+    lastName: "Uzoma",
+    email: "uzoma@gmail.com",
     dept: "HR",
     status: "Active"
   },

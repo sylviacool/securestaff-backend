@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import './components/ListEmployeeComponent';
+import ListEmployeeComponent from "./components/ListEmployeeComponent";
 
 const App = () => {
   return (
     <div>
-      <h1 className="text-center">Hello World</h1>
+      <ListEmployeeComponent />
     </div>
   );
 };

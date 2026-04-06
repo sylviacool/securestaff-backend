@@ -3,10 +3,10 @@ import employees from "../data/employees";
 
 const ListEmployeeComponent = () => {
   return (
-    <div>
-      <h2>Employee List</h2>
+    <div className="container">
+      <h2 className="text-center">List of Employees</h2>
 
-      <table border="1">
+      <table className="table table-striped table-hover table-bordered">
         <thead>
           <tr>
             <th>ID</th>
