@@ -1,7 +1,19 @@
-import React from "react";
-import employees from "../data/employees";
+import React, {useEffect, useState} from "react";
+import { listEmployees } from "../services/EmployeeService";
 
 const ListEmployeeComponent = () => {
+
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+      listEmployees().then((response) => {
+        setEmployees(response.data);
+      }).catch(error => {
+         console.error(error); 
+      });
+      
+  }, [])
+
   return (
     <div className="container">
       <h2 className="text-center">List of Employees</h2>
