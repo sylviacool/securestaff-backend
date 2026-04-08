@@ -6,7 +6,7 @@ const ListEmployeeComponent = () => {
 
   const [employees, setEmployees] = useState([]);
 
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
       listEmployees().then((response) => {
@@ -18,7 +18,7 @@ const ListEmployeeComponent = () => {
   }, [])
 
   function addNewEmployee() {
-    navigator('/add-employee')
+    navigate('/add-employee')
   }
 
 
