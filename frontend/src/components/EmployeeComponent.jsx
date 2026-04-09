@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { createEmployee } from "../services/EmployeeService";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeComponent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  })
+
+  const navigate = useNavigate();
 
   function handleFirstName(e) {
     setFirstName(e.target.value);
@@ -24,9 +33,46 @@ const EmployeeComponent = () => {
     const employee = { firstName, lastName, email };
     console.log(employee);
 
-    createEmployee(employee).then((response) => {
+    createEmployee(employee)
+    .then((response) => {
       console.log(response.data);
+      navigate('/employees');
     })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+  function validateForm() {
+    let valid = true;
+
+    const errorsCopy = {... errors}
+
+    if(firstName.trim()) {
+      errorsCopy.firstName = '';
+    } else {
+      errorsCopy.firstName = 'First name is required';
+      valid = false;
+    }
+
+    if(lastName.trim()) {
+      errorsCopy.lastName = '';
+    } else {
+      errorsCopy.lastName = 'Last name is required';
+      valid = false;
+    }
+
+    if(email.trim()) {
+      errorsCopy.email = '';
+    } else {
+      errorsCopy.email = 'Email name is required';
+      valid = false;
+    }
+
+    setErrors(errorsCopy);
+
+      return valid;
+    
   }
 
   return (
