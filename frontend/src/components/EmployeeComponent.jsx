@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createEmployee } from "../services/EmployeeService";
 
 const EmployeeComponent = () => {
   const [firstName, setFirstName] = useState("");
@@ -22,6 +23,10 @@ const EmployeeComponent = () => {
 
     const employee = { firstName, lastName, email };
     console.log(employee);
+
+    createEmployee(employee).then((response) => {
+      console.log(response.data);
+    })
   }
 
   return (
