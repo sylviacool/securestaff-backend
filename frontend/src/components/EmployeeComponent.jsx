@@ -7,27 +7,31 @@ const EmployeeComponent = () => {
 
   function handleFirstName(e) {
     setFirstName(e.target.value);
-
   }
 
-  
   function handleLastName(e) {
     setLastName(e.target.value);
-
   }
 
-   function handleEmail(e) {
+  function handleEmail(e) {
     setEmail(e.target.value);
+  }
 
+  function saveEmployee(e) {
+    e.preventDefault();
+
+    const employee = { firstName, lastName, email };
+    console.log(employee);
   }
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <div className="row">
-        <div className="card">
-          <h2 className="text-center">Add Employee</h2>
+        <div className="card col-md-6 offset-md-3">
+          <h2 className="text-center mt-3">Add Employee</h2>
+
           <div className="card-body">
-            <form>
+            <form onSubmit={saveEmployee}>
               <div className="form-group mb-2">
                 <label className="form-label">First Name:</label>
                 <input
@@ -57,16 +61,17 @@ const EmployeeComponent = () => {
                 <input
                   type="text"
                   placeholder="Enter Employee Email"
-                  name="Email"
+                  name="email"
                   value={email}
                   className="form-control"
                   onChange={handleEmail}
                 />
               </div>
 
-              <button className="btn btn-success" onClick={saveEmployee}>Submit</button>
+              <button type="submit" className="btn btn-success">
+                Submit
+              </button>
             </form>
-
           </div>
         </div>
       </div>
