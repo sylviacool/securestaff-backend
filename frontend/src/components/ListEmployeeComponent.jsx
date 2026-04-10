@@ -21,6 +21,10 @@ const ListEmployeeComponent = () => {
     navigate('/add-employee')
   }
 
+  function updateEmployee(id) {
+    navigate(`/edit-employee/${id}`)
+  }
+
 
   return (
     <div className="container">
