@@ -1,6 +1,11 @@
-import React, { useState } from "react";
-import { createEmployee } from "../services/EmployeeService";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
+import {
+  createEmployee,
+  getEmployee,
+  updateEmployee,
+} from "../services/EmployeeService";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EmployeeComponent = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +19,21 @@ const EmployeeComponent = () => {
   });
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      getEmployee(id)
+        .then((response) => {
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setEmail(response.data.email);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [id]);
 
   function handleFirstName(e) {
     setFirstName(e.target.value);
@@ -27,17 +47,31 @@ const EmployeeComponent = () => {
     setEmail(e.target.value);
   }
 
-  function saveEmployee(e) {
+  function saveOrUpdateEmployee(e) {
     e.preventDefault();
 
     if (validateForm()) {
-      const employee = { firstName, lastName, email };
-      console.log(employee);
+      const employee = { firstName, lastName, email }
 
-      createEmployee(employee).then((response) => {
-        console.log(response.data);
-        navigate("/employees");
-      });
+      if (id) {
+        updateEmployee(id, employee)
+          .then((response) => {
+            console.log(response.data);
+            navigate("/employees");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        createEmployee(employee)
+          .then((response) => {
+            console.log(response.data);
+            navigate("/employees");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   }
 
@@ -63,23 +97,30 @@ const EmployeeComponent = () => {
     if (email.trim()) {
       errorsCopy.email = "";
     } else {
-      errorsCopy.email = "Email name is required";
+      errorsCopy.email = "Email is required";
       valid = false;
     }
 
     setErrors(errorsCopy);
-
     return valid;
+  }
+
+  function pageTitle() {
+    if (id) {
+      return <h2 className="text-center mt-3">Update Employee</h2>;
+    } else {
+      return <h2 className="text-center mt-3">Add Employee</h2>;
+    }
   }
 
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="card col-md-6 offset-md-3">
-          <h2 className="text-center mt-3">Add Employee</h2>
+          {pageTitle()}
 
           <div className="card-body">
-            <form onSubmit={saveEmployee}>
+            <form onSubmit={saveOrUpdateEmployee}>
               <div className="form-group mb-2">
                 <label className="form-label">First Name:</label>
                 <input
@@ -87,11 +128,13 @@ const EmployeeComponent = () => {
                   placeholder="Enter Employee First Name"
                   name="firstName"
                   value={firstName}
-                  className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
+                  className={`form-control ${
+                    errors.firstName ? "is-invalid" : ""
+                  }`}
                   onChange={handleFirstName}
                 />
                 {errors.firstName && (
-                  <div className="invalid-feedback"> {errors.firstName}</div>
+                  <div className="invalid-feedback">{errors.firstName}</div>
                 )}
               </div>
 
@@ -102,18 +145,20 @@ const EmployeeComponent = () => {
                   placeholder="Enter Employee Last Name"
                   name="lastName"
                   value={lastName}
-                  className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
+                  className={`form-control ${
+                    errors.lastName ? "is-invalid" : ""
+                  }`}
                   onChange={handleLastName}
                 />
                 {errors.lastName && (
-                  <div className="invalid-feedback"> {errors.lastName}</div>
+                  <div className="invalid-feedback">{errors.lastName}</div>
                 )}
               </div>
 
               <div className="form-group mb-2">
                 <label className="form-label">Email:</label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Enter Employee Email"
                   name="email"
                   value={email}
@@ -121,7 +166,7 @@ const EmployeeComponent = () => {
                   onChange={handleEmail}
                 />
                 {errors.email && (
-                  <div className="invalid-feedback"> {errors.email}</div>
+                  <div className="invalid-feedback">{errors.email}</div>
                 )}
               </div>
 
