@@ -26,4 +26,8 @@ public class Employee {
     @Column(name = "email_id", nullable = false, unique = true)
     private  String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EmployeeStatus status = EmployeeStatus.ACTIVE;
+
 }

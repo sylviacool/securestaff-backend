@@ -1,5 +1,6 @@
 package com.sylvia.securestaff.dto;
 
+import com.sylvia.securestaff.entity.EmployeeStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String email;
+    private EmployeeStatus status;
 }
