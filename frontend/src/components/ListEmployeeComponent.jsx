@@ -4,6 +4,7 @@ import { listEmployees, deleteEmployee } from "../services/EmployeeService";
 
 const ListEmployeeComponent = () => {
   const [employees, setEmployees] = useState([]);
+  const [filterStatus, setFilterStatus] = useState("ALL");
 
   const navigate = useNavigate();
 
@@ -50,12 +51,38 @@ const ListEmployeeComponent = () => {
     }
   }
 
+  const filteredEmployees =
+    filterStatus === "ALL"
+      ? employees
+      : employees.filter((employee) => employee.status === filterStatus);
+
   return (
     <div className="container">
-      <h2 className="text-center">List of Employees</h2>
-      <button className="btn btn-primary mb-2" onClick={addNewEmployee}>
-        Add Employee
-      </button>
+      <div
+        style={{
+          display: "flex",
+          gap: "15px",
+          alignItems: "center",
+          marginBottom: "15px",
+        }}
+      >
+        <button className="btn btn-primary" onClick={addNewEmployee}>
+          Add Employee
+        </button>
+        <div>
+          <label className="form-label me-2">Filter by Status:</label>
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="form-select"
+            style={{ width: "200px" }}
+          >
+            <option value="ALL">All</option>
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
+          </select>
+        </div>
+      </div>
 
       <table className="table table-striped table-hover table-bordered">
         <thead>
@@ -70,7 +97,7 @@ const ListEmployeeComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {filteredEmployees.map((employee) => (
             <tr key={employee.id}>
               <td>{employee.id}</td>
               <td>{employee.firstName}</td>
