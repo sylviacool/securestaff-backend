@@ -91,7 +91,6 @@ const ListEmployeeComponent = () => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Department</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -103,7 +102,6 @@ const ListEmployeeComponent = () => {
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
-              <td>{employee.dept}</td>
               <td>
                 <span
                   className={

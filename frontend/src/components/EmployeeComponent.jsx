@@ -170,18 +170,18 @@ const EmployeeComponent = () => {
                 {errors.email && (
                   <div className="invalid-feedback">{errors.email}</div>
                 )}
+              </div>
 
-                <div className="form-group mb-2">
-                  <label className="form-label">Status:</label>
-                  <select
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    className="form-control"
-                  >
-                    <option value="ACTIVE">Active</option>
-                    <option value="INACTIVE">Inactive</option>
-                  </select>
-                </div>
+              <div className="form-group mb-2">
+                <label className="form-label">Status:</label>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="form-control"
+                >
+                  <option value="ACTIVE">Active</option>
+                  <option value="INACTIVE">Inactive</option>
+                </select>
               </div>
 
               <button type="submit" className="btn btn-success">
