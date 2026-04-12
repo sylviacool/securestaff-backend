@@ -11,6 +11,7 @@ const EmployeeComponent = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("ACTIVE");
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -28,6 +29,7 @@ const EmployeeComponent = () => {
           setFirstName(response.data.firstName);
           setLastName(response.data.lastName);
           setEmail(response.data.email);
+          setStatus(response.data.status);
         })
         .catch((error) => {
           console.error(error);
@@ -51,7 +53,7 @@ const EmployeeComponent = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      const employee = { firstName, lastName, email }
+      const employee = { firstName, lastName, email, status };
 
       if (id) {
         updateEmployee(id, employee)
@@ -168,6 +170,18 @@ const EmployeeComponent = () => {
                 {errors.email && (
                   <div className="invalid-feedback">{errors.email}</div>
                 )}
+
+                <div className="form-group mb-2">
+                  <label className="form-label">Status:</label>
+                  <select
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    className="form-control"
+                  >
+                    <option value="ACTIVE">Active</option>
+                    <option value="INACTIVE">Inactive</option>
+                  </select>
+                </div>
               </div>
 
               <button type="submit" className="btn btn-success">

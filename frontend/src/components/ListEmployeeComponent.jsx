@@ -51,7 +51,11 @@ const ListEmployeeComponent = () => {
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
               <td>{employee.dept}</td>
-              <td>{employee.status}</td>
+              <td>
+                  <span className={employee.status === "ACTIVE" ? "text-success fw-bold" : "text-danger fw-bold"}>
+                    {employee.status}
+                  </span>
+              </td>
               <td>
                 <button className="btn btn-info" onClick={() => updateEmployee(employee.id)}>Update</button>
               </td>
