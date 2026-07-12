@@ -35,7 +35,7 @@ SecureStaff is a full-stack employee management application developed using Reac
 
 ### Deployment
 - Docker
-- Render
+- Railway
 
 ---
 
@@ -67,10 +67,10 @@ React Frontend → REST API → Spring Boot Backend → PostgreSQL Database
 
 ## Live Demo
 ### Frontend
-https://securestaff-employee-management-frontend.onrender.com
+https://securestaff-frontend.up.railway.app
 
 ### Backend API
-https://securestaff-employee-management.onrender.com/api/employees
+https://securestaff-employee-management-production.up.railway.app/api/employees
 
 ---
 
@@ -112,7 +112,7 @@ http://localhost:3000
 ## Environment Variables
 Frontend:
 ```env
-VITE_API_BASE_URL=http://localhost:8080/api/employees
+VITE_API_BASE_URL=VITE_API_BASE_URL=https://securestaff-employee-management-production.up.railway.app/api/employees
 ```
 
 Backend database configuration:
