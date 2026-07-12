@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REST_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;;
+const REST_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // GET ALL
 export const listEmployees = () => axios.get(REST_API_BASE_URL);
@@ -9,7 +9,8 @@ export const listEmployees = () => axios.get(REST_API_BASE_URL);
 export const createEmployee = (employee) =>
   axios.post(REST_API_BASE_URL, employee);
 
-//GET ONE
+//GET ONEclear
+
 export const getEmployee = (employeeId) =>
   axios.get(REST_API_BASE_URL + "/" + employeeId);
 
