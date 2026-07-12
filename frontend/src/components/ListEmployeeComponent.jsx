@@ -11,7 +11,8 @@ const ListEmployeeComponent = () => {
   useEffect(() => {
     listEmployees()
       .then((response) => {
-        setEmployees(response.data);
+        const data = Array.isArray(response.data) ? response.data : [];
+        setEmployees(data);
       })
       .catch((error) => {
         console.error(error);
@@ -38,8 +39,9 @@ const ListEmployeeComponent = () => {
         .then(() => {
           console.log("Deleted successfully");
           listEmployees()
-            .then((response) => {
-              setEmployees(response.data);
+           .then((response) => {
+              const data = Array.isArray(response.data) ? response.data : [];
+              setEmployees(data);
             })
             .catch((error) => {
               console.error(error);
